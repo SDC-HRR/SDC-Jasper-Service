@@ -20,4 +20,17 @@ app.get('/media', (req, res) => {
   db.getGame(game, callback);
 });
 
+app.post('/media', (req, res) => {
+  res.sendStatus(200);
+});
+
+app.put('/media', (req, res) => {
+  res.sendStatus(200);
+});
+
+app.delete('/media', (req, res) => {
+  res.sendStatus(200);
+});
+
+
 module.exports = app;
