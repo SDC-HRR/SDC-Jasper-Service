@@ -20,8 +20,34 @@ app.get('/media', (req, res) => {
   db.getGame(game, callback);
 });
 
+let id = 10000000;
 app.post('/media', (req, res) => {
-  res.sendStatus(200);
+  id += 1;
+  const game = {
+    proxyId: id,
+    summary: {
+      title: 'title',
+      splash: 'splash',
+      description: 'description',
+      reviews: { general: String, total: Number },
+      releaseDate: 'release date',
+      developer: 'developer',
+      publisher: 'publisher',
+      tags: ['tags'],
+      percentage: 50,
+    },
+    media: {
+      video: [{ video: 'video', thumbnail: 'thumbnail' }],
+      images: ['images'],
+    },
+  };
+  db.postGame(game, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 app.put('/media', (req, res) => {

@@ -52,3 +52,19 @@ module.exports.getGame = (game, cb) => {
     }
   });
 };
+
+module.exports.postGame = (game, cb) => {
+  Game.insert(game, (err, result) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, result);
+    }
+  }
+};
+
+module.exports.deleteGame = (game, cb) => {
+
+};
+
+
