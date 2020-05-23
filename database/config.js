@@ -67,4 +67,5 @@ module.exports.deleteGame = (game, cb) => {
 
 };
 
+/////I'M CURIOUS ABOUT YA'LLS THOUGHTS ON THIS ^
 
