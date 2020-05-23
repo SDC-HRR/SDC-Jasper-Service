@@ -60,12 +60,35 @@ module.exports.postGame = (game, cb) => {
     } else {
       cb(null, result);
     }
-  }
+  });
 };
 
-module.exports.deleteGame = (game, cb) => {
-
+module.exports.deleteGame = (obj, cb) => {
+  Game.deleteOne(obj, (err, result) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(result);
+    }
+  });
 };
 
-/////I'M CURIOUS ABOUT YA'LLS THOUGHTS ON THIS ^
+module.exports.putGame = (search, obj, cb) => {
+  Game.updateOne(search, obj, (err, result) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, result);
+    }
+  });
+};
 
+module.exports.deleteGame = (obj, cb) => {
+  Game.deleteOne(obj, (err, result) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, result);
+    }
+  });
+};
