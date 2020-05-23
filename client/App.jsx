@@ -46,6 +46,7 @@ class App extends React.Component {
       },
     })
       .then((result) => {
+        console.log(result);
         this.setState({
           game: result.data[0],
         });
