@@ -29,7 +29,7 @@ app.post('/media', (req, res) => {
       title: 'title',
       splash: 'splash',
       description: 'description',
-      reviews: { general: String, total: Number },
+      reviews: { general: 'general', total: 4 },
       releaseDate: 'release date',
       developer: 'developer',
       publisher: 'publisher',
@@ -51,11 +51,26 @@ app.post('/media', (req, res) => {
 });
 
 app.put('/media', (req, res) => {
-  res.sendStatus(200);
+  const game = req.query;
+  console.log(req.body);
+  db.putGame({ proxyId: game }, { summary: req.body.summary }, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 app.delete('/media', (req, res) => {
-  res.sendStatus(200);
+  const game = req.query;
+  db.deleteGame({ proxyId: game }, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 module.exports = app;
