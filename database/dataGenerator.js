@@ -1,41 +1,33 @@
 /* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-consts */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-console */
 const faker = require('faker');
 const fs = require('fs');
-const ObjectsToCsv = require('objects-to-csv');
 
 const options = ['Overwhelmingly Positive', 'Very Positive', 'Positive', 'Mostly Positive', 'Mixed', 'Mostly Negative', 'Negative', 'Very Negative', 'Overwhelmingly Negative'];
 
-const imgOptions = ['https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic1.jpeg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic2.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic3.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic4.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic5.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic6.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic7.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic8.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic9.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic10.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic11.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic12.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic13.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/pic15.jpg'];
+const imgOptions = ['https://fecpictures.s3.us-east-2.amazonaws.com/pics/1.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/2.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/3.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/4.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/5.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/6.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/7.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/8.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/9.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/10.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/11.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/12.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/13.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/14.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/15.jpg'];
 
-const vidOptions = [{ video: 'https://steamcdn-a.akamaihd.net/steam/apps/2028243/movie480.webm?t=1554408553', thumbnail: 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/vid1.jpg'},
-  { video: 'https://steamcdn-a.akamaihd.net/steam/apps/256659154/movie480.webm?t=1511366817', thumbnail: 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/vid2.jpg' },
-  { video: 'https://steamcdn-a.akamaihd.net/steam/apps/256785187/movie480_vp9.webm?t=1589339181', thumbnail: 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/vid3.jpg' },
-  { video: 'https://steamcdn-a.akamaihd.net/steam/apps/256679401/movie480.webm?t=1497589417', thumbnail: 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/vid4.jpg'},
-  { video: 'https://steamcdn-a.akamaihd.net/steam/apps/256776898/movie480.webm?t=1583434862', thumbnail: 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/vid5.jpg' },
-  { video: 'https://steamcdn-a.akamaihd.net/steam/apps/256660296/movie480.webm?t=1454099186', thumbnail: 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/vid6.jpg' },
-  { video: 'https://steamcdn-a.akamaihd.net/steam/apps/256724514/movie480.webm?t=1581426984', thumbnail: 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/vid7.jpg' },
-];
+const vidOptions = [{video: 'https://www.youtube.com/embed/ftLzQefpBvM',thumbnail: 'https://i.ytimg.com/vi/ftLzQefpBvM/mqdefault.jpg'},{video: 'https://www.youtube.com/embed/JMBUWQ1ipZM',thumbnail: 'https://i.ytimg.com/vi/JMBUWQ1ipZM/mqdefault.jpg'},{video: 'https://www.youtube.com/embed/ZWzkgKPZWcw',thumbnail: 'https://i.ytimg.com/vi/ZWzkgKPZWcw/mqdefault.jpg'},{video: 'https://www.youtube.com/embed/-gsXevAjNbw',thumbnail: 'https://i.ytimg.com/vi/-gsXevAjNbw/mqdefault.jpg'},{video: 'https://www.youtube.com/embed/nCzwGVKpjpo',thumbnail: 'https://i.ytimg.com/vi/nCzwGVKpjpo/mqdefault.jpg'},{video: 'https://www.youtube.com/embed/s8ulsVULANg',thumbnail: 'https://i.ytimg.com/vi/s8ulsVULANg/mqdefault.jpg'},{video: 'https://www.youtube.com/embed/15-7tBKVPBA',thumbnail: 'https://i.ytimg.com/vi/15-7tBKVPBA/mqdefault.jpg'},];
 
-const splashOptions = ['https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/Splash1.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/Splash2.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/Splash3.jpg', 'https://fec-pics.s3.us-east-2.amazonaws.com/FECassets/Splash4.jpg'];
+const splashOptions = ['https://fecpictures.s3.us-east-2.amazonaws.com/pics/16.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/17.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/18.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/19.jpg', 'https://fecpictures.s3.us-east-2.amazonaws.com/pics/20.jpg'];
 
 
 const writer = fs.createWriteStream('./database/data.csv');
-writer.write('proxyId, summary, media\n');
+writer.write('description|developer|id|images|percentage|publisher|release_date|review_total|reviews_general|splash|tags|thumbnails|title|videos\n');
 
 const seeder = () => {
   let counter = 1;
-
-
   const write = () => {
     let ok = true;
     do {
-      console.log(counter);
+      if (counter % 10000 === 0) {
+        console.log(counter);
+      }
       const pics = [];
       for (let i = 0; i < Math.ceil(Math.random() * 10); i += 1) {
-        pics.push(imgOptions[Math.floor(Math.random() * 15)]);
+        pics.push(imgOptions[Math.floor(Math.random() * 14)]);
       }
 
       const tagList = [];
@@ -45,10 +37,23 @@ const seeder = () => {
 
       const vids = [];
       for (let i = 0; i < Math.ceil(Math.random() * 3); i += 1) {
-        vids.push(vidOptions[Math.floor(Math.random() * 7)]);
+        vids.push(vidOptions[Math.floor(Math.random() * 6)]);
       }
+      const title = faker.commerce.productName();
+      const splash = splashOptions[Math.floor(Math.random() * 3)];
+      const description = faker.lorem.paragraph();
+      const reviewsGeneral = options[Math.floor(Math.random() * 9)];
+      const reviewTotal = faker.random.number();
+      const releaseDate = faker.date.past();
+      const developer = faker.company.companyName();
+      const publisher = faker.company.companyName();
+      const tags = tagList;
+      const percentage = Math.ceil(Math.random() * 100);
+      const videos = vids.map(video => video.video);
+      const thumbnails = vids.map(video => video.thumbnail);
+      const images = pics;
 
-      const JSONData = `${counter},\"{title: ${faker.commerce.productName()},splash: ${splashOptions[Math.floor(Math.random() * 4)]},description: ${faker.lorem.paragraph()},reviews: ${JSON.stringify({ general: options[Math.floor(Math.random() * 9)], total: faker.random.number() })},releaseDate: ${faker.date.past()},developer: ${faker.company.companyName()},publisher: ${faker.company.companyName()},tags: ${tagList},percentage: ${Math.ceil(Math.random() * 100)},}\",\"{video: ${JSON.stringify(vids)},images: ${pics}}\"`;
+      const JSONData = `"${description}"|"${developer}"|${counter}|"${JSON.stringify(images)}"|${percentage}|"${publisher}"|"${releaseDate}"|"${reviewsGeneral}"|${reviewTotal}|"${splash}"|"${JSON.stringify(tags)}"|"${JSON.stringify(thumbnails)}"|"${title}"|"${JSON.stringify(videos)}"`;
       counter += 1;
       if (counter === 10000001) {
         writer.write(JSONData + "\n");
