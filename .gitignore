@@ -2,3 +2,4 @@ node_modules/
 public/bundle.js
 database/data.csv
 package-lock.json
+newrelic.js
