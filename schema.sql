@@ -4,12 +4,10 @@ CREATE DATABASE games;
 
 \c games;
 
-DROP TABLE IF EXISTS gamesTable;
-
 CREATE TABLE gamesTable (
+  id SERIAL PRIMARY KEY,
   description text,
   developer text,
-  id int PRIMARY KEY,
   images text,
   percentage int,
   publisher text,

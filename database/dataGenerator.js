@@ -1,5 +1,4 @@
 /* eslint-disable no-shadow */
-/* eslint-disable no-unused-consts */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-console */
 const faker = require('faker');
@@ -15,7 +14,7 @@ const splashOptions = ['https://fecpictures.s3.us-east-2.amazonaws.com/pics/16.j
 
 
 const writer = fs.createWriteStream('./database/data.csv');
-writer.write('description|developer|id|images|percentage|publisher|release_date|review_total|reviews_general|splash|tags|thumbnails|title|videos\n');
+writer.write('description|developer|images|percentage|publisher|release_date|review_total|reviews_general|splash|tags|thumbnails|title|videos\n');
 
 const seeder = () => {
   let counter = 1;
@@ -53,7 +52,7 @@ const seeder = () => {
       const thumbnails = vids.map(video => video.thumbnail);
       const images = pics;
 
-      const JSONData = `"${description}"|"${developer}"|${counter}|"${JSON.stringify(images)}"|${percentage}|"${publisher}"|"${releaseDate}"|"${reviewsGeneral}"|${reviewTotal}|"${splash}"|"${JSON.stringify(tags)}"|"${JSON.stringify(thumbnails)}"|"${title}"|"${JSON.stringify(videos)}"`;
+      const JSONData = `"${description}"|"${developer}"|"${JSON.stringify(images)}"|${percentage}|"${publisher}"|"${releaseDate}"|"${reviewsGeneral}"|${reviewTotal}|"${splash}"|"${JSON.stringify(tags)}"|"${JSON.stringify(thumbnails)}"|"${title}"|"${JSON.stringify(videos)}"`;
       counter += 1;
       if (counter === 10000001) {
         writer.write(JSONData + "\n");

@@ -1,0 +1,20 @@
+config:
+  target: 'http://localhost:8000'
+  processor: './randomNumber.js'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - loop:
+      - function: 'randomId'
+      - get:
+          url: "/media/?id={{id}}"
+      count: 100
+    - loop:
+      - post:
+          url: "/media"
+      count: 100
